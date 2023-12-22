@@ -16,9 +16,7 @@ const Cart = () => {
       <SheetTrigger asChild className="group">
         <Button variant="ghost">
           <ShoppingCart className="h-5 w-5" aria-hidden="true" />
-          <span className="ml-2 text-sm font-medium text-muted-foreground/6 0 group-hover:text-muted-foreground/90">
-            {0}
-          </span>
+          <span className="ml-2 text-sm font-medium opacity-60 dark:opacity-100 group-hover:opacity-90">{0}</span>
         </Button>
       </SheetTrigger>
       <SheetContent className="flex w-full flex-col pr-0 sm:max-w-lg">
