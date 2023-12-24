@@ -1,9 +1,11 @@
 import type { Metadata } from "next"
 import { Roboto } from "next/font/google"
-import "./globals.css"
-import { cn } from "@/lib/utils"
 import Navbar from "@/components/Navbar"
 import { ThemeProvider } from "@/components/ThemeProvider"
+import Providers from "@/components/Providers"
+import { Toaster } from "sonner"
+import "./globals.css"
+import { cn } from "@/lib/utils"
 
 const roboto = Roboto({ weight: ["400"], subsets: ["latin"] })
 
@@ -23,10 +25,13 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           disableTransitionOnChange
           storageKey="themeVal">
           <main className="relative flex flex-col min-h-screen">
-            <Navbar />
-            <div className="flex-1 flex-grow">{children}</div>
+            <Providers>
+              <Navbar />
+              <div className="flex-1 flex-grow">{children}</div>
+            </Providers>
           </main>
         </ThemeProvider>
+        <Toaster position='bottom-center' richColors />
       </body>
     </html>
   )
