@@ -10,17 +10,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useLogoutUser } from "@/hooks/useLogoutUser"
+import { UserCircle2 } from "lucide-react"
 
 const NavUserDropdown = ({ user }: { user: User }) => {
   const { signOut } = useLogoutUser()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="overflow-visible">
-        <Button variant="ghost" className="relative no-focus">
+        <Button variant="ghost" className="relative no-focus gap-x-1">
+          <UserCircle2 className="w-[18px] h-[18px]" />
           Account
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-60">
+      <DropdownMenuContent className="w-60" align="end">
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-0.5 leading-none">
             <p className="text-sm font-medium">{user.email}</p>

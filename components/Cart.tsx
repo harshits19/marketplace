@@ -13,26 +13,26 @@ const Cart = () => {
   const cartTotal = 0
   return (
     <Sheet>
-      <SheetTrigger asChild className="group">
+      <SheetTrigger asChild>
         <Button variant="ghost">
-          <ShoppingCart className="h-5 w-5" aria-hidden="true" />
-          <span className="ml-2 text-sm font-medium opacity-60 dark:opacity-100 group-hover:opacity-90">{0}</span>
+          <ShoppingCart className="w-[18px] h-[18px]" aria-hidden="true" />
+          {/* <span className="ml-2 text-sm font-medium opacity-60 dark:opacity-100 group-hover:opacity-90">{0}</span> */}
         </Button>
       </SheetTrigger>
-      <SheetContent className="flex w-full flex-col pr-0 sm:max-w-lg">
+      <SheetContent className="flex flex-col w-full pr-0 sm:max-w-lg">
         <SheetHeader className="space-y-2.5 pr-6">
           <SheetTitle>Cart ({itemCount})</SheetTitle>
         </SheetHeader>
         {itemCount > 0 ? (
           <>
-            <div className="flex w-full flex-col pr-6">
+            <div className="flex flex-col w-full pr-6">
               {/*  <ScrollArea>
                 {items.map(({ product }) => (
                   <CartItem product={product} key={product.id} />
                 ))}
               </ScrollArea> */}
             </div>
-            <div className="space-y-4 pr-6">
+            <div className="pr-6 space-y-4">
               <DropdownMenuSeparator />
               <div className="space-y-1.5 text-sm">
                 <div className="flex">
@@ -63,7 +63,7 @@ const Cart = () => {
             </div>
           </>
         ) : (
-          <div className="flex h-full flex-col items-center justify-center space-y-1">
+          <div className="flex flex-col items-center justify-center h-full space-y-1">
             <div aria-hidden="true" className="relative mb-4 h-60 w-96 text-muted-foreground">
               <Image src="/popeye-looking.png" fill alt="empty shopping cart" />
             </div>
