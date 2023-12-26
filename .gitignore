@@ -20,6 +20,8 @@
 # misc
 .DS_Store
 *.pem
+/server/media
+/server/product_files
 
 # debug
 npm-debug.log*

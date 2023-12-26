@@ -2,6 +2,7 @@ import Link from "next/link"
 import Container from "@/components/Container"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { ArrowDownToLine, CheckCircle, Leaf } from "lucide-react"
+import ProductsCarousel from "@/components/ProductsCarousel"
 
 const perks = [
   {
@@ -41,6 +42,7 @@ const Home = () => {
             <Button variant="ghost">Our quality promise &rarr;</Button>
           </div>
         </div>
+        <ProductsCarousel title="Brand New" href="/products" query={{ sort: "desc", limit: 4 }} />
       </Container>
       <section className="border-t border-muted-foreground/10 bg-muted/50">
         <Container className="py-20">
