@@ -4,6 +4,7 @@ import Container from "@/components/Container"
 import Cart from "@/components/Cart"
 import NavItems from "@/components/NavItems"
 import ThemeButton from "@/components/ThemeButton"
+import { Separator } from "@/components/ui/separator"
 import { Icons } from "@/components/Icons"
 import { buttonVariants } from "@/components/ui/button"
 import NavUserDropdown from "@/components/NavUserDropdown"
@@ -27,7 +28,7 @@ const Navbar = async () => {
               <NavItems />
             </div>
             <div className="flex items-center ml-auto">
-              <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-3">
+              <div className="items-center justify-end flex-1 hidden gap-x-3 md:flex">
                 {user ? (
                   <NavUserDropdown user={user} />
                 ) : (
@@ -35,9 +36,9 @@ const Navbar = async () => {
                     Sign in
                   </Link>
                 )}
-                <div className="w-px h-6 bg-muted-foreground/20" aria-hidden="true" />
+                <Separator orientation="vertical" className="h-6" aria-hidden />
                 <ThemeButton />
-                <div className="w-px h-6 bg-muted-foreground/20" aria-hidden="true" />
+                <Separator orientation="vertical" className="h-6" aria-hidden />
                 <Cart />
               </div>
             </div>

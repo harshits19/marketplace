@@ -16,7 +16,6 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -40,7 +39,7 @@ body {
     --ring: 142.1 76.2% 36.3%;
     --radius: 0.5rem;
   }
- 
+
   .dark {
     --background: 20 14.3% 4.1%;
     --foreground: 0 0% 95%;
@@ -66,4 +65,13 @@ body {
 
 .no-focus {
   @apply my-0 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
+}
+.cartItemBox::-webkit-scrollbar {
+  @apply w-2;
+}
+.cartItemBox::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+.cartItemBox::-webkit-scrollbar-thumb {
+  @apply rounded-lg bg-muted-foreground/20;
 }

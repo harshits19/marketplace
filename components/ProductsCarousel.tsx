@@ -35,7 +35,7 @@ const ProductsCarousel = ({ title, subtitle, href, query }: ProductsCarouselProp
   return (
     <section className="py-12">
       <div className="mb-4 md:flex md:items-center md:justify-between">
-        <div className="max-w-2xl px-4 lg:max-w-4xl lg:px-0">
+        <div className="max-w-2xl lg:max-w-4xl">
           {title && <h1 className="text-2xl font-bold sm:text-3xl">{title}</h1>}
           {subtitle && <p className="mt-2 text-sm text-muted-foreground">{subtitle}</p>}
         </div>
