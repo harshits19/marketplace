@@ -16,7 +16,6 @@ const Cart = () => {
   const itemCount = items.length
   const cartTotal = items.reduce((total, { product }) => total + product.price, 0)
   const fee = 100
-  const shippingFee = fee * 1.25
   const [isMounted, setIsMounted] = useState(false)
   useEffect(() => {
     setIsMounted(true)
@@ -59,7 +58,7 @@ const Cart = () => {
               <div className="space-y-1.5 text-sm">
                 <div className="flex">
                   <span className="flex-1">Shipping</span>
-                  <span>{formatPrice(shippingFee)}</span>
+                  <span>FREE</span>
                 </div>
                 <div className="flex">
                   <span className="flex-1">Transaction Fee</span>
