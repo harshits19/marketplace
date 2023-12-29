@@ -14,7 +14,7 @@ import { AuthCredentialsValidator, TAuthCredentialsValidator } from "@/lib/valid
 import { cn } from "@/lib/utils"
 import { ArrowRight } from "lucide-react"
 
-const page = () => {
+const SigninPage = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const isSeller = searchParams.get("as")
@@ -127,4 +127,4 @@ const page = () => {
     </div>
   )
 }
-export default page
+export default SigninPage

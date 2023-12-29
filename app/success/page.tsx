@@ -14,7 +14,7 @@ interface PageProps {
     [key: string]: string | string[] | undefined
   }
 }
-const page = async ({ searchParams }: PageProps) => {
+const SuccessPage = async ({ searchParams }: PageProps) => {
   const orderId = searchParams.orderId
   const nextCookies = cookies()
   const { user } = await useGetUser(nextCookies)
@@ -125,4 +125,4 @@ const page = async ({ searchParams }: PageProps) => {
     </main>
   )
 }
-export default page
+export default SuccessPage

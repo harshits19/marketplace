@@ -9,7 +9,7 @@ import { useCart } from "@/hooks/useCart"
 import { cn, formatPrice } from "@/lib/utils"
 import { Loader2 } from "lucide-react"
 
-const page = () => {
+const CartPage = () => {
   const router = useRouter()
   const { items, clearCart } = useCart()
   const [isMounted, setIsMounted] = useState(false)
@@ -94,4 +94,4 @@ const page = () => {
     </div>
   )
 }
-export default page
+export default CartPage

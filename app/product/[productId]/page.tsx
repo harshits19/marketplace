@@ -17,7 +17,7 @@ const BREADCRUMBS = [
   { id: 2, name: "Products", href: "/products" },
 ]
 
-const page = async ({ params: { productId } }: ProductPageProps) => {
+const ProductPage = async ({ params: { productId } }: ProductPageProps) => {
   const { product, label, validUrls } = await useGetProduct(productId)
   return (
     <Container>
@@ -83,4 +83,4 @@ const page = async ({ params: { productId } }: ProductPageProps) => {
     </Container>
   )
 }
-export default page
+export default ProductPage

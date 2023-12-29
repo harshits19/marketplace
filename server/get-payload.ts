@@ -5,7 +5,7 @@ import type { InitOptions } from "payload/config"
 import nodemailer from "nodemailer"
 
 dotenv.config({
-  path: path.resolve(__dirname, "../.env"),
+  path: path.resolve(__dirname, "../../.env"),
 })
 
 const transporter = nodemailer.createTransport({
@@ -45,7 +45,7 @@ export const getPayloadClient = async ({ initOptions }: Args = {}): Promise<Payl
         fromAddress: "onboarding@resend.dev",
         fromName: "MarketPlace",
       },
-      secret: process.env.PAYLOAD_SECRET,
+      secret: process.env.PAYLOAD_SECRET || "bakeorcake",
       local: initOptions?.express ? false : true,
       ...(initOptions || {}),
     })

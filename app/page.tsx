@@ -23,7 +23,7 @@ const perks = [
   },
 ]
 
-const Home = () => {
+const HomePage = () => {
   return (
     <>
       <Container>
@@ -67,4 +67,4 @@ const Home = () => {
     </>
   )
 }
-export default Home
+export default HomePage
