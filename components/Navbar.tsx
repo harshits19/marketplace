@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator"
 import { Icons } from "@/components/Icons"
 import { buttonVariants } from "@/components/ui/button"
 import NavUserDropdown from "@/components/NavUserDropdown"
+import MobileNav from "@/components/MobileNav"
 import { useGetUser } from "@/hooks/useGetUser"
 
 const Navbar = async () => {
@@ -18,11 +19,13 @@ const Navbar = async () => {
       <header className="relative border-b bg-background border-muted-foreground/20">
         <Container>
           <div className="flex items-center h-16">
-            {/* <MobileNav /> */}
             <div className="flex ml-4 lg:ml-0">
               <Link href="/">
                 <Icons.logo className="w-10 h-10" />
               </Link>
+            </div>
+            <div className="flex justify-end w-full md:hidden">
+              <MobileNav user={user} />
             </div>
             <div className="z-50 hidden lg:ml-8 lg:block lg:self-stretch">
               <NavItems />
@@ -37,9 +40,9 @@ const Navbar = async () => {
                   </Link>
                 )}
                 <Separator orientation="vertical" className="h-6" aria-hidden />
-                <ThemeButton />
+                <ThemeButton variant="desktop" />
                 <Separator orientation="vertical" className="h-6" aria-hidden />
-                <Cart />
+                <Cart variant="desktop" />
               </div>
             </div>
           </div>

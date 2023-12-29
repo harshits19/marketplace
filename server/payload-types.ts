@@ -21,6 +21,8 @@ export interface Config {
 export interface User {
   id: string;
   role: 'admin' | 'user';
+  products?: (string | Product)[] | null;
+  product_files?: (string | ProductFile)[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -34,7 +36,7 @@ export interface User {
 }
 export interface Product {
   id: string;
-  user: string | User;
+  user?: (string | null) | User;
   name: string;
   description?: string | null;
   price: number;

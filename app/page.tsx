@@ -44,7 +44,7 @@ const HomePage = () => {
         </div>
         <ProductsCarousel title="Brand New" href="/products" query={{ sort: "desc", limit: 4 }} />
       </Container>
-      <section className="border-t border-muted-foreground/10 bg-muted/50">
+      <section className="border-t border-muted-foreground/10 bg-muted/80">
         <Container className="py-20">
           <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-0">
             {perks.map((perk) => (

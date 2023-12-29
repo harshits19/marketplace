@@ -111,4 +111,17 @@ export const Icons = {
       <polygon fill="#ffc7a3" points="22.159,68.037 26.764,74.326 30.149,70.718 25.768,66.388"></polygon>
     </svg>
   ),
+  home: (props: LucideProps) => (
+    <svg
+      {...props}
+      stroke="currentColor"
+      fill="currentColor"
+      strokeWidth="0"
+      viewBox="0 0 24 24"
+      height="1em"
+      width="1em">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+    </svg>
+  ),
 }

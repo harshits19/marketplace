@@ -45,7 +45,7 @@ export const getPayloadClient = async ({ initOptions }: Args = {}): Promise<Payl
         fromAddress: "onboarding@resend.dev",
         fromName: "MarketPlace",
       },
-      secret: process.env.PAYLOAD_SECRET || "bakeorcake",
+      secret: process.env.PAYLOAD_SECRET,
       local: initOptions?.express ? false : true,
       ...(initOptions || {}),
     })

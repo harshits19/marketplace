@@ -68,7 +68,7 @@ const SigninPage = () => {
   }
 
   return (
-    <div className="container relative flex flex-col items-center justify-center pt-20 lg:px-0">
+    <div className="container relative flex flex-col items-center justify-center pt-20 lg:px-0 mb-20">
       <div className="flex mx-auto w-full flex-col justify-center space-y-6 sm:w-[350px] ">
         <div className="flex flex-col items-center space-y-2 text-center">
           <Icons.logo className="size-20" />

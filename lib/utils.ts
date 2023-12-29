@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { PRODUCT_CATEGORIES } from "@/lib/config"
@@ -32,4 +33,47 @@ export function parseLabelsAndImgs(product: Product) {
     .map(({ image }) => (typeof image === "string" ? image : image.url))
     .filter(Boolean) as string[]
   return { label, validUrls }
+}
+
+export function constructMetadata({
+  title = 'MarketPlace - the all in one place for digital assets',
+  description = 'MarketPlace is an ecommerce platform for high-quality digital assets and services.',
+  image = '/thumbnail.png',
+  icons = '/icon.png',
+  noIndex = false,
+}: {
+  title?: string
+  description?: string
+  image?: string
+  icons?: string
+  noIndex?: boolean
+} = {}): Metadata {
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [
+        {
+          url: image,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image],
+      creator: '@harshitgaur14',
+    },
+    icons,
+    metadataBase: new URL('https://marketplace-production-bc49.up.railway.app'),
+    ...(noIndex && {
+      robots: {
+        index: false,
+        follow: false,
+      },
+    }),
+  }
 }

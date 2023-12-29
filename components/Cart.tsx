@@ -11,7 +11,7 @@ import { ShoppingCart } from "lucide-react"
 import { formatPrice } from "@/lib/utils"
 import { useCart } from "@/hooks/useCart"
 
-const Cart = () => {
+const Cart = ({ variant }: { variant: "desktop" | "mobile" }) => {
   const { items, clearCart } = useCart()
   const itemCount = items.length
   const cartTotal = items.reduce((total, { product }) => total + product.price, 0)
@@ -24,14 +24,28 @@ const Cart = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" className="relative">
-          <ShoppingCart className="w-[18px] h-[18px]" aria-hidden="true" />
-          {isMounted && items?.length > 0 && (
-            <span className="bg-primary text-white absolute top-1 right-1 h-4 w-4 flex items-center justify-center text-[10px] rounded-full">
-              {items.length}
+        {variant === "desktop" ? (
+          <Button variant="ghost" className="relative">
+            <ShoppingCart className="size-[18px]" aria-hidden="true" />
+            {isMounted && items?.length > 0 && (
+              <span className="bg-primary text-white absolute top-1 right-1 h-4 w-4 flex items-center justify-center text-[10px] rounded-full">
+                {items.length}
+              </span>
+            )}
+          </Button>
+        ) : (
+          <div className="flex items-center p-4 duration-100 ease-in cursor-pointer hover:bg-muted/40">
+            <span className="relative w-6">
+              <ShoppingCart className="size-5" aria-hidden="true" />
+              {isMounted && items?.length > 0 && (
+                <span className="bg-primary text-white absolute -top-1 -right-2 size-3 flex items-center justify-center text-[9px] rounded-full">
+                  {items.length}
+                </span>
+              )}
             </span>
-          )}
-        </Button>
+            <span className="pl-3 leading-3">Cart</span>
+          </div>
+        )}
       </SheetTrigger>
       <SheetContent className="flex flex-col w-full pr-0 sm:max-w-lg">
         <SheetHeader className="flex flex-row items-center justify-between pr-8 mt-2">
