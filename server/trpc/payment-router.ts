@@ -13,11 +13,13 @@ export const paymentRouter = router({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const { user } = ctx
+      //we will get productIds(were present in cart then processed to checkout) as input
+      const { user } = ctx //see (trps.ts)
       let { productIds } = input
       if (productIds.length === 0) {
         throw new TRPCError({ code: "BAD_REQUEST" })
       }
+      //fetching all product's details
       const payload = await getPayloadClient()
       const { docs: products } = await payload.find({
         collection: "products",
@@ -28,8 +30,9 @@ export const paymentRouter = router({
         },
       })
 
-      const filteredProducts = products.filter((prod) => Boolean(prod.priceId))
+      const filteredProducts = products.filter((prod) => Boolean(prod.priceId)) //filtering products with valid priceId
 
+      //creating new order instance containing all filtered products
       const order = await payload.create({
         collection: "orders",
         data: {
@@ -39,8 +42,9 @@ export const paymentRouter = router({
         },
       })
 
+      //line-items is like a waiting list(cart) for items that have to be processed by stripe
       const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = []
-
+      //pushing products in line items with their priceId as well as quantity
       filteredProducts.forEach((product) => {
         line_items.push({
           price: product.priceId!,
@@ -48,6 +52,7 @@ export const paymentRouter = router({
         })
       })
 
+      //pushing processing fees at last (generated in stripe dev)
       line_items.push({
         price: "price_1OSI2BSGElnarwkWRj5dr8tR",
         quantity: 1,
@@ -69,14 +74,17 @@ export const paymentRouter = router({
           },
           line_items,
         })
-        return { url: stripeSession.url }
+        //passing metadata to use after processing payment(on success page)
+        return { url: stripeSession.url } //used in cart page, to redirect to success page, when payment is success
       } catch (err) {
         console.log(err)
         return { url: null }
       }
     }),
+
+  //to check whether the payment is succesfull or not (isPaid ? true : false)
   paymentOrderStatus: privateProcedure.input(z.object({ orderId: z.string() })).query(async ({ input }) => {
-    const { orderId } = input
+    const { orderId } = input //takes orderId as input and returns the isPaid value
     const payload = await getPayloadClient()
     const { docs: orders } = await payload.find({
       collection: "orders",

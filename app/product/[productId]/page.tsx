@@ -4,7 +4,7 @@ import CartButton from "@/components/CartButton"
 import ImageSlider from "@/components/ImageSlider"
 import ProductsCarousel from "@/components/ProductsCarousel"
 import { Separator } from "@/components/ui/separator"
-import { formatPrice, parseLabelsAndImgs } from "@/lib/utils"
+import { formatPrice } from "@/lib/utils"
 import { Check, Shield } from "lucide-react"
 import { useGetProduct } from "@/hooks/useGetProduct"
 

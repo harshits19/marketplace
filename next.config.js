@@ -11,6 +11,10 @@ const nextConfig = {
       {
         hostname: "marketplace-production-bc49.up.railway.app",
         protocol: "https",
+      },
+      {
+        hostname: "marketplace-app-gbrd.onrender.com",
+        protocol: "https",
       }
     ],
   },

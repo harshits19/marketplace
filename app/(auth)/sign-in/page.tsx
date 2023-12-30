@@ -54,9 +54,9 @@ const SigninPage = () => {
         router.refresh()
         return
       }
-      
       if (isSeller) {
         router.push("/sell")
+        return
       }
       router.push("/")
       router.refresh()

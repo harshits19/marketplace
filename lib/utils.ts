@@ -36,10 +36,10 @@ export function parseLabelsAndImgs(product: Product) {
 }
 
 export function constructMetadata({
-  title = 'MarketPlace - the all in one place for digital assets',
-  description = 'MarketPlace is an ecommerce platform for high-quality digital assets and services.',
-  image = '/thumbnail.png',
-  icons = '/icon.png',
+  title = "MarketPlace",
+  description = "MarketPlace is an ecommerce platform for high-quality digital assets and services.",
+  image = "/thumbnail.png",
+  icons = "/icon.png",
   noIndex = false,
 }: {
   title?: string
@@ -61,14 +61,14 @@ export function constructMetadata({
       ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title,
       description,
       images: [image],
-      creator: '@harshitgaur14',
+      creator: "@harshitgaur14",
     },
     icons,
-    metadataBase: new URL('https://marketplace-production-bc49.up.railway.app'),
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_SERVER_URL}`),
     ...(noIndex && {
       robots: {
         index: false,

@@ -21,7 +21,7 @@ export const Users: CollectionConfig = {
   },
   access: {
     read: adminsAndUser,
-    create: () => true,
+    create: () => true, //everyone (SIGNUP)
     update: ({ req }) => req.user.role === "admin",
     delete: ({ req }) => req.user.role === "admin",
   },
@@ -44,20 +44,20 @@ export const Users: CollectionConfig = {
       ],
     },
     {
-      name: "products",
+      name: "products", // products listed by seller(user)
       label: "Products",
       admin: {
-        condition: () => false,
+        condition: () => false, //admin can't see product on user profile
       },
       type: "relationship",
       relationTo: "products",
       hasMany: true,
     },
     {
-      name: "product_files",
+      name: "product_files", //product files - purchased by user
       label: "Product Files",
       admin: {
-        condition: () => false,
+        condition: () => false, //admin can't see product files on user profile
       },
       type: "relationship",
       relationTo: "product_files",

@@ -47,8 +47,8 @@ const MobileNav = ({ user }: { user: User }) => {
           <ChevronRight className="p-2 rounded-full cursor-pointer h-9 w-9" />
         </div>
         <div className="flex flex-col">
+          <ThemeButton variant="mobile" />
           <Link href="/" className="contents">
-            <ThemeButton variant="mobile" />
             <div className="flex items-center p-4 duration-100 ease-in cursor-pointer hover:bg-muted/40">
               <Icons.home className="size-6" />
               <span className="pl-3 leading-3">Home</span>

@@ -16,7 +16,7 @@ export const Orders: CollectionConfig = {
     description: "all orders",
   },
   access: {
-    read: yourOwn,
+    read: yourOwn, //only you (owner) can access the ordered files
     update: ({ req }) => req.user.role === "admin",
     delete: ({ req }) => req.user.role === "admin",
     create: ({ req }) => req.user.role === "admin",
@@ -26,12 +26,12 @@ export const Orders: CollectionConfig = {
       name: "_isPaid",
       type: "checkbox",
       access: {
-        read: ({ req }) => req.user.role === "admin",
+        read: ({ req }) => req.user.role === "admin", //only admin can see, its value is updated by stripe webhook upon confirmation of payment
         create: () => false,
         update: () => false,
       },
       admin: {
-        hidden: true,
+        hidden: true, //not shown in admin dashboard
       },
       required: true,
     },

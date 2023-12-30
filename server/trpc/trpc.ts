@@ -9,6 +9,7 @@ export const router = t.router
 // public access endpoint
 export const publicProcedure = t.procedure
 
+//if user is logged in, then create a middleware to pass user details as trpc context to each request on
 const isAuth = t.middleware(async ({ ctx, next }) => {
   const req = ctx.req as PayloadRequest
   const { user } = req as { user: User | null }

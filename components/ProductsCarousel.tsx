@@ -15,7 +15,7 @@ interface ProductsCarouselProps {
 const FALLBACK_LIMIT = 4
 
 const ProductsCarousel = ({ title, subtitle, href, query }: ProductsCarouselProps) => {
-  const { data, isLoading } = trpc.getInfiniteProducts.useInfiniteQuery(
+  const { data, isLoading } = trpc.getInfiniteProducts.carouselData.useInfiniteQuery(
     {
       limit: query.limit ?? FALLBACK_LIMIT,
       query,
@@ -47,15 +47,15 @@ const ProductsCarousel = ({ title, subtitle, href, query }: ProductsCarouselProp
           </Link>
         )}
       </div>
-        <div className="relative">
-          <div className="flex items-center w-full mt-6">
-            <div className="grid w-full grid-cols-2 gap-4 sm:gap-x-6 md:grid-cols-4 md:gap-y-10 lg:gap-x-8">
-              {mappedProducts.map((product, idx) => (
-                <ProductItem product={product} key={idx} index={idx} />
-              ))}
-            </div>
+      <div className="relative">
+        <div className="flex items-center w-full mt-6">
+          <div className="grid w-full grid-cols-2 gap-4 sm:gap-x-6 md:grid-cols-4 md:gap-y-10 lg:gap-x-8">
+            {mappedProducts.map((product, idx) => (
+              <ProductItem product={product} key={idx} index={idx} />
+            ))}
           </div>
         </div>
+      </div>
     </section>
   )
 }

@@ -1,5 +1,6 @@
 import { User } from "../payload-types"
 import { Access, CollectionConfig } from "payload/types"
+
 const isAdminOrhasAccesstoImages =
   (): Access =>
   async ({ req }) => {
@@ -18,14 +19,15 @@ export const Media: CollectionConfig = {
   hooks: {
     beforeChange: [
       ({ req, data }) => {
-        return { ...data, user: req.user.id } /* association image with its respective owner */
+        return { ...data, user: req.user.id } // association media with its seller(of product)
       },
     ],
   },
   access: {
     read: async ({ req }) => {
-      /* frontend users should be able to see all images */
+      // frontend users should be able to see all images
       const referrer = req.headers.referer
+      //to identify this media is accessed on frontend and not cms
       if (!req.user || !referrer?.includes("sell")) {
         return true
       }
@@ -35,7 +37,7 @@ export const Media: CollectionConfig = {
     update: isAdminOrhasAccesstoImages(),
   },
   admin: {
-    hidden: ({ user }) => user.role !== "admin" /* hidden to users */,
+    hidden: ({ user }) => user.role !== "admin", // only visible in admin dashboard,hidden to sellers,
   },
   upload: {
     staticURL: "/media",
@@ -45,7 +47,7 @@ export const Media: CollectionConfig = {
       { name: "card", width: 768, height: 768, position: "centre" },
       { name: "tablet", width: 1024, height: undefined, position: "centre" },
     ],
-    mimeTypes: ["image/*"] /* only image types */,
+    mimeTypes: ["image/*"], // only image types
   },
   fields: [
     {
@@ -55,7 +57,7 @@ export const Media: CollectionConfig = {
       required: true,
       hasMany: false,
       admin: {
-        condition: () => false,
+        condition: () => false, //dont show owner of media in cms except admin
       },
     },
   ],
