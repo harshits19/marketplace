@@ -17,7 +17,7 @@ const CartButton = ({ product }: { product: Product }) => {
   return (
     <Button
       size="lg"
-      className="w-full"
+      className="w-full mt-10"
       onClick={() => {
         addItem(product)
         setIsSuccess(true)

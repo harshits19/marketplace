@@ -36,12 +36,19 @@ const SuccessPage = async ({ searchParams }: PageProps) => {
   const orderTotal = products.reduce((total, product) => {
     return total + product.price
   }, 0)
+  const transFee = 100
 
   return (
     <main className="lg:min-h-full">
       <div className="max-w-2xl px-4 py-16 mx-auto sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8 lg:py-32 xl:gap-x-24">
         <div className="relative hidden w-full overflow-hidden lg:flex h-3/4">
-          <Image fill src="/popeye-greeting.png" className="object-contain" sizes="100vw" alt="thank you for your order" />
+          <Image
+            fill
+            src="/popeye-greeting.png"
+            className="object-contain"
+            sizes="100vw"
+            alt="thank you for your order"
+          />
         </div>
         <div className="lg:col-start-2">
           <p className="text-sm font-medium text-primary">Order successful</p>
@@ -106,11 +113,11 @@ const SuccessPage = async ({ searchParams }: PageProps) => {
               </div>
               <div className="flex justify-between">
                 <p>Transaction Fee</p>
-                <p>{formatPrice(100)}</p>
+                <p>{formatPrice(transFee)}</p>
               </div>
               <div className="flex items-center justify-between pt-6 border-t border-muted">
                 <p className="text-base">Total</p>
-                <p className="text-base">{formatPrice(orderTotal + 1)}</p>
+                <p className="text-base">{formatPrice(orderTotal + transFee)}</p>
               </div>
             </div>
             <PaymentStatus isPaid={order._isPaid} orderEmail={(order.user as User).email} orderId={order.id} />

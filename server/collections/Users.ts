@@ -26,22 +26,26 @@ export const Users: CollectionConfig = {
     delete: ({ req }) => req.user.role === "admin",
   },
   admin: {
-    hidden: ({ user }) => user.role !== "admin",
-    defaultColumns: ["id"],
+    hidden: ({ user }) => user.role !== "admin", //collection will hidden in cms view for non-admins
+    defaultColumns: ["username", "email", "role"],
+    useAsTitle: "username",
   },
   fields: [
     {
       name: "role",
       required: true,
       defaultValue: "user",
-      //   admin: {
-      //     condition: () => false,
-      //   },
       type: "select",
       options: [
         { label: "Admin", value: "admin" },
         { label: "User", value: "user" },
       ],
+    },
+    {
+      name: "username",
+      label: "Name",
+      type: "text",
+      required: false,
     },
     {
       name: "products", // products listed by seller(user)

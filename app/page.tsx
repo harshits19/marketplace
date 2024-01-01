@@ -39,7 +39,7 @@ const HomePage = () => {
             <Link href="/products" className={buttonVariants()}>
               Browse Trending
             </Link>
-            <Button variant="ghost">Our quality promise &rarr;</Button>
+            <Button variant="secondary">Our quality promise &rarr;</Button>
           </div>
         </div>
         <ProductsCarousel title="Brand New" href="/products" query={{ sort: "desc", limit: 4 }} />

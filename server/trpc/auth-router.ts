@@ -5,7 +5,7 @@ import { AuthCredentialsValidator } from "../../lib/validators/auth-validator"
 
 export const authRouter = router({
   createPayloadUser: publicProcedure.input(AuthCredentialsValidator).mutation(async ({ input }) => {
-    const { email, password } = input
+    const { username, email, password } = input
     const payload = await getPayloadClient()
 
     //check user
@@ -19,12 +19,19 @@ export const authRouter = router({
     })
     if (users.length !== 0) throw new TRPCError({ code: "CONFLICT" })
 
-    await payload.create({
+    const user = await payload.create({
       collection: "users",
       data: {
+        username,
         email,
         password,
         role: "user",
+      },
+    })
+    await payload.create({
+      collection: "wishlist",
+      data: {
+        user: user.id,
       },
     })
 

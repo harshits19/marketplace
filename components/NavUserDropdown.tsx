@@ -25,12 +25,18 @@ const NavUserDropdown = ({ user }: { user: User }) => {
       <DropdownMenuContent className="w-60" align="end">
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-0.5 leading-none">
-            <p className="text-sm font-medium">{user.email}</p>
+            <p className="text-sm font-medium truncate">{`Welcome ${user.username}`}</p>
           </div>
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/sell">Seller Dashboard</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/orders">My Orders</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/wishlist">My Wishlist</Link>
         </DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer" onClick={signOut}>
           Log-out

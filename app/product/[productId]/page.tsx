@@ -4,9 +4,10 @@ import CartButton from "@/components/CartButton"
 import ImageSlider from "@/components/ImageSlider"
 import ProductsCarousel from "@/components/ProductsCarousel"
 import { Separator } from "@/components/ui/separator"
+import WishlistButton from "@/components/WishlistButton"
 import { formatPrice } from "@/lib/utils"
-import { Check, Shield } from "lucide-react"
 import { useGetProduct } from "@/hooks/useGetProduct"
+import { Check, Shield } from "lucide-react"
 
 interface ProductPageProps {
   params: { productId: string }
@@ -19,6 +20,7 @@ const BREADCRUMBS = [
 
 const ProductPage = async ({ params: { productId } }: ProductPageProps) => {
   const { product, label, validUrls } = await useGetProduct(productId)
+
   return (
     <Container>
       <div className="max-w-2xl px-4 py-16 mx-auto sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
@@ -62,9 +64,8 @@ const ProductPage = async ({ params: { productId } }: ProductPageProps) => {
         </div>
         <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
           <div>
-            <div className="mt-10">
-              <CartButton product={product} />
-            </div>
+            <CartButton product={product} />
+            <WishlistButton product={product} />
             <div className="mt-6 text-center">
               <div className="inline-flex text-sm font-medium group">
                 <Shield className="flex-shrink-0 mr-2 size-5 text-muted-foreground/50" />

@@ -28,7 +28,7 @@ const ImageSlider = ({ urls, linkURL }: { urls: string[]; linkURL?: string }) =>
       <CarouselPrevious className="z-50 hidden transition-opacity duration-100 opacity-0 md:inline-flex group-hover/main:opacity-80" />
       <CarouselNext className="z-50 hidden transition-opacity duration-100 opacity-0 md:inline-flex group-hover/main:opacity-80" />
       <div className="absolute flex -translate-x-1/2 bottom-2 left-1/2">
-        {urls.map((_, index) => (
+        {urls?.length > 1 && urls?.map((_, index) => (
           <CarouselDot index={index} key={index} />
         ))}
       </div>

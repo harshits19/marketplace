@@ -54,12 +54,20 @@ const MobileNav = ({ user }: { user: User }) => {
               <span className="pl-3 leading-3">Home</span>
             </div>
           </Link>
-          <Link href="/" className="contents">
+          <Link href="/orders" className="contents">
             <div className="flex items-center p-4 duration-100 ease-in cursor-pointer hover:bg-muted/40">
               <span className="w-6">
                 <UserCircle className="size-5" />
               </span>
-              <span className="pl-3 leading-3">Account</span>
+              <span className="pl-3 leading-3">My Orders</span>
+            </div>
+          </Link>
+          <Link href="/wishlist" className="contents">
+            <div className="flex items-center p-4 duration-100 ease-in cursor-pointer hover:bg-muted/40">
+              <span className="w-6">
+                <UserCircle className="size-5" />
+              </span>
+              <span className="pl-3 leading-3">My Wishlist</span>
             </div>
           </Link>
           <Cart variant="mobile" />

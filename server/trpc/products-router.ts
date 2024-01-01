@@ -1,6 +1,6 @@
 import { z } from "zod"
 import { getPayloadClient } from "../get-payload"
-import { publicProcedure, router } from "./trpc"
+import { privateProcedure, publicProcedure, router } from "./trpc"
 import { QueryValidator } from "../../lib/validators/query-validator"
 
 export const productsRouter = router({
@@ -46,4 +46,40 @@ export const productsRouter = router({
         nextPage: hasNextPage ? nextPage : null,
       }
     }),
+  modifyWishList: privateProcedure.input(z.object({ products: z.string() })).mutation(async ({ ctx, input }) => {
+    //get current user details
+    const { user } = ctx
+    const { products } = input
+    const productIds = JSON.parse(products) as string[]
+
+    const payload = await getPayloadClient()
+    await payload.update({
+      collection: "wishlist",
+      where: {
+        user: {
+          equals: user.id,
+        },
+      },
+      data: {
+        products: productIds.map((productId) => productId),
+      },
+    })
+    return { sucess: true }
+  }),
+  getWishList: privateProcedure.query(async ({ ctx }) => {
+    //get current user details
+    const { user } = ctx
+    const payload = await getPayloadClient()
+    const userList = await payload.find({
+      collection: "wishlist",
+      where: {
+        user: {
+          equals: user.id,
+        },
+      },
+      limit: 1,
+      depth: 2,
+    })
+    return userList
+  }),
 })

@@ -4,7 +4,7 @@ import payload, { Payload } from "payload"
 import type { InitOptions } from "payload/config"
 
 dotenv.config({
-  path: path.resolve(__dirname, "../../.env"),
+  path: path.resolve(__dirname, "../.env"),
 })
 
 /* const transporter = nodemailer.createTransport({

@@ -42,8 +42,8 @@ const SignupPage = () => {
     },
   })
 
-  const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
-    mutate({ email, password })
+  const onSubmit = ({ username, email, password }: TAuthCredentialsValidator) => {
+    mutate({ username, email, password })
   }
 
   return (
@@ -60,6 +60,15 @@ const SignupPage = () => {
         <div className="grid gap-6">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid gap-2">
+              <div className="grid gap-2">
+                <Label htmlFor="username">Name</Label>
+                <Input
+                  className={cn({ "focus-visible:ring-red-500": errors.username })}
+                  {...register("username")}
+                  placeholder="name"
+                />
+                {errors.username && <p className="text-sm text-red-500">{errors.username.message}</p>}
+              </div>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input

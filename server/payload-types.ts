@@ -13,6 +13,7 @@ export interface Config {
     media: Media;
     product_files: ProductFile;
     orders: Order;
+    wishlist: Wishlist;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -21,6 +22,7 @@ export interface Config {
 export interface User {
   id: string;
   role: 'admin' | 'user';
+  username?: string | null;
   products?: (string | Product)[] | null;
   product_files?: (string | ProductFile)[] | null;
   updatedAt: string;
@@ -107,6 +109,13 @@ export interface Order {
   _isPaid: boolean;
   user: string | User;
   products: (string | Product)[];
+  updatedAt: string;
+  createdAt: string;
+}
+export interface Wishlist {
+  id: string;
+  user?: (string | null) | User;
+  products?: (string | Product)[] | null;
   updatedAt: string;
   createdAt: string;
 }
