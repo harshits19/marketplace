@@ -2,6 +2,8 @@ import { z } from "zod"
 import { getPayloadClient } from "../get-payload"
 import { privateProcedure, publicProcedure, router } from "./trpc"
 import { QueryValidator } from "../../lib/validators/query-validator"
+import { TRPCError } from "@trpc/server"
+import { revalidatePath } from "next/cache"
 
 export const productsRouter = router({
   carouselData: publicProcedure
@@ -46,12 +48,11 @@ export const productsRouter = router({
         nextPage: hasNextPage ? nextPage : null,
       }
     }),
-  modifyWishList: privateProcedure.input(z.object({ products: z.string() })).mutation(async ({ ctx, input }) => {
+  modifyWishList: privateProcedure.input(z.object({ products: z.string()})).mutation(async ({ ctx, input }) => {
     //get current user details
     const { user } = ctx
     const { products } = input
     const productIds = JSON.parse(products) as string[]
-
     const payload = await getPayloadClient()
     await payload.update({
       collection: "wishlist",
@@ -64,13 +65,13 @@ export const productsRouter = router({
         products: productIds.map((productId) => productId),
       },
     })
-    return { sucess: true }
   }),
   getWishList: privateProcedure.query(async ({ ctx }) => {
     //get current user details
     const { user } = ctx
+    if (!user) throw new TRPCError({ code: "UNAUTHORIZED" })
     const payload = await getPayloadClient()
-    const userList = await payload.find({
+    const wishlist = await payload.find({
       collection: "wishlist",
       where: {
         user: {
@@ -80,6 +81,7 @@ export const productsRouter = router({
       limit: 1,
       depth: 2,
     })
-    return userList
+    if (!wishlist?.docs?.length) throw new TRPCError({ code: "NOT_FOUND" })
+    return wishlist
   }),
 })

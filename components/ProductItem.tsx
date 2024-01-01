@@ -42,7 +42,7 @@ const ProductItem = ({ product, index }: ProductItemProps) => {
     )
 }
 
-const ProductPlaceholder = () => {
+export const ProductPlaceholder = () => {
   return (
     <div className="flex flex-col w-full">
       <div className="relative w-full overflow-hidden bg-muted aspect-square rounded-xl">

@@ -32,6 +32,7 @@ export const authRouter = router({
       collection: "wishlist",
       data: {
         user: user.id,
+        products: [],
       },
     })
 

@@ -8,6 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu"
 import { useLogoutUser } from "@/hooks/useLogoutUser"
 import { UserCircle2 } from "lucide-react"
@@ -22,12 +23,11 @@ const NavUserDropdown = ({ user }: { user: User }) => {
           Account
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-60" align="end">
-        <div className="flex items-center justify-start gap-2 p-2">
-          <div className="flex flex-col space-y-0.5 leading-none">
-            <p className="text-sm font-medium truncate">{`Welcome ${user.username}`}</p>
-          </div>
-        </div>
+      <DropdownMenuContent className="w-52" align="end">
+        <DropdownMenuLabel>
+          <p className="text-sm font-medium truncate">Welcome! {user.username}</p>
+          <p className="text-xs truncate">{user.email}</p>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/sell">Seller Dashboard</Link>
@@ -38,6 +38,7 @@ const NavUserDropdown = ({ user }: { user: User }) => {
         <DropdownMenuItem asChild>
           <Link href="/wishlist">My Wishlist</Link>
         </DropdownMenuItem>
+        <DropdownMenuSeparator />
         <DropdownMenuItem className="cursor-pointer" onClick={signOut}>
           Log-out
         </DropdownMenuItem>

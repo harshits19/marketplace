@@ -1,17 +1,19 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { trpc } from "@/server/trpc/client"
 import { cn } from "@/lib/utils"
 import { Product } from "@/server/payload-types"
 
 const WishlistButton = ({ product }: { product: Product }) => {
+  const router = useRouter()
+  const pathname = usePathname()
   const productId = product?.id
   const { mutate: modifyWishList } = trpc.getInfiniteProducts.modifyWishList.useMutation({})
   const { data } = trpc.getInfiniteProducts.getWishList.useQuery()
-  console.log(data)
-  const wishlist = data?.docs[0].products?.map((prod) => prod) as Product[] | undefined
+  const wishlist = data?.docs[0]?.products?.map((prod) => prod) as Product[]
   const wishlistIds = wishlist?.flatMap((prod) => prod.id)
   const isWishlisted = wishlistIds?.some((id) => id === productId)
   useEffect(() => {
@@ -21,38 +23,28 @@ const WishlistButton = ({ product }: { product: Product }) => {
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation()
-    if (!wishlistIds) return
-    if (isWishlisted) {
-      setIsClicked(false)
-      let response = wishlistIds.filter((id) => id !== productId)
-      let productIds = JSON.stringify(response)
-      modifyWishList({ products: productIds })
-    } else {
-      setIsClicked(true)
-      let response = [...wishlistIds, productId]
-      let productIds = JSON.stringify(response)
-      modifyWishList({ products: productIds })
+    try {
+      if (isWishlisted) {
+        setIsClicked(false)
+        let response = wishlistIds.filter((id) => id !== productId)
+        let productIds = JSON.stringify(response)
+        modifyWishList({ products: productIds })
+      } else {
+        setIsClicked(true)
+        let response = [...wishlistIds, productId]
+        let productIds = JSON.stringify(response)
+        modifyWishList({ products: productIds })
+      }
+    } catch (error) {
+      router.push(`/sign-in?origin=${pathname.slice(1)}`)
+      return
     }
   }
 
   return (
-    <Button
-      className={cn("w-full mt-4")}
-      variant={isClicked ? "destructive" : "secondary"}
-      size="lg"
-      onClick={handleClick}>
+    <Button className={cn("w-full mt-4")} variant={isClicked ? "outline" : "secondary"} size="lg" onClick={handleClick}>
       {isClicked ? "Remove from wishlist" : "Add to wishlist"}
     </Button>
   )
 }
 export default WishlistButton
-
-/*
-  const predicate = (prod: Product) => prod.id === product.id
-   const [optimisticList, addOptimisticListItem] = useOptimistic<Product[]>(
-    wishlist,
-    // @ts-ignore
-    (state: Product[], newproduct: Product) =>
-      state.some(predicate) ? state.filter((prod) => prod.id !== product.id) : [...state, newproduct]
-  )
-  */

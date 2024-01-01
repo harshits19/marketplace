@@ -21,7 +21,7 @@ const OrdersPage = () => {
   }, [data])
 
   return (
-    <Container className="max-w-5xl mt-8 sm:mt-20">
+    <Container className="max-w-5xl my-8 sm:my-20">
       <h1 className="text-2xl font-semibold sm:text-5xl">My Orders</h1>
       <section className="flex flex-col mt-8">
         <div className="flex items-center justify-end w-full gap-2 pb-4 border-b border-muted">
@@ -45,7 +45,7 @@ const OrdersPage = () => {
             ))}
           </div>
         ) : (
-          <p className="p-8 my-16 text-3xl font-semibold text-center">No orders yet!</p>
+          <p className="p-8 my-16 text-xl font-semibold text-center">No orders yet!</p>
         )}
       </section>
     </Container>
