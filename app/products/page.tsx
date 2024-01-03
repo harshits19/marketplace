@@ -25,7 +25,7 @@ const ProductsPage = ({ searchParams }: ProductsPageProps) => {
         query={{
           category,
           limit: 4,
-          sort: sort === "desc" || sort === "asc" ? sort : undefined,
+          sort,
         }}
       />
     </Container>
