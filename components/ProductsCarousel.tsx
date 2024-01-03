@@ -1,9 +1,9 @@
 "use client"
+import Link from "next/link"
 import ProductItem from "@/components/ProductItem"
-import { TQueryValidator } from "@/lib/validators/query-validator"
 import { Product } from "@/server/payload-types"
 import { trpc } from "@/server/trpc/client"
-import Link from "next/link"
+import { TQueryValidator } from "@/lib/validators/query-validator"
 
 interface ProductsCarouselProps {
   title: string

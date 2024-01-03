@@ -3,13 +3,13 @@ import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import CartItem from "@/components/CartItem"
+import CartItem from "@/components/navbar/CartItem"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { DropdownMenuSeparator } from "@/components/ui/dropdown-menu"
-import { ShoppingCart } from "lucide-react"
 import { formatPrice } from "@/lib/utils"
 import { useCart } from "@/hooks/useCart"
+import { ShoppingCart } from "lucide-react"
 
 const Cart = ({ variant }: { variant: "desktop" | "mobile" }) => {
   const { items, clearCart } = useCart()

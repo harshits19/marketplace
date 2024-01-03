@@ -82,17 +82,7 @@ const ProductItems = ({ product, orderId }: { product: Product; orderId: string 
 
 export const OrderItemsShimmer = () => {
   return (
-    <section className="w-full h-full mt-8 space-y-4">
-      <div className="border rounded border-muted">
-        <Skeleton className="w-full h-12 rounded-none" />
-        <div className="flex flex-col p-4 gap-y-4 sm:grid sm:grid-cols-2">
-          <Skeleton className="size-20 sm:size-28 shrink-0" />
-          <div className="flex flex-col items-end gap-y-2">
-            <Skeleton className="w-full sm:w-24 h-7 sm:h-8" />
-            <Skeleton className="w-full sm:w-24 h-7 sm:h-8" />
-          </div>
-        </div>
-      </div>
+    <section className="w-full h-full mt-4 space-y-4">
       <div className="border rounded border-muted">
         <Skeleton className="w-full h-12 rounded-none" />
         <div className="flex flex-col p-4 gap-y-4 sm:grid sm:grid-cols-2">

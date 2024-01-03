@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Icons } from "@/components/Icons"
-import Cart from "@/components/Cart"
+import Cart from "@/components/navbar/Cart"
 import ThemeButton from "@/components/ThemeButton"
 import { Button } from "@/components/ui/button"
 import { useLogoutUser } from "@/hooks/useLogoutUser"
@@ -59,7 +59,7 @@ const MobileNav = ({ user }: { user: User }) => {
               <span className="w-6">
                 <UserCircle className="size-5" />
               </span>
-              <span className="pl-3 leading-3">My Orders</span>
+              <span className="pl-3 leading-3">Orders</span>
             </div>
           </Link>
           <Link href="/wishlist" className="contents">
@@ -67,24 +67,16 @@ const MobileNav = ({ user }: { user: User }) => {
               <span className="w-6">
                 <UserCircle className="size-5" />
               </span>
-              <span className="pl-3 leading-3">My Wishlist</span>
+              <span className="pl-3 leading-3">Wishlist</span>
             </div>
           </Link>
           <Cart variant="mobile" />
-          <Link href="/products?category=icons" className="contents">
+          <Link href="/products" className="contents">
             <div className="flex items-center p-4 duration-100 ease-in cursor-pointer hover:bg-muted/40">
               <span className="w-6">
                 <Highlighter className="size-5" />
               </span>
-              <span className="pl-3 leading-3">Icons</span>
-            </div>
-          </Link>
-          <Link href="/products?category=ui_kits" className="contents">
-            <div className="flex items-center p-4 duration-100 ease-in cursor-pointer hover:bg-muted/40">
-              <span className="w-6">
-                <CalendarDays className="size-5" />
-              </span>
-              <span className="pl-3 leading-3">UI Kits</span>
+              <span className="pl-3 leading-3">Products</span>
             </div>
           </Link>
           <Link href="/sell" className="contents">

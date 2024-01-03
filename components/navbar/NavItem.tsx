@@ -9,26 +9,34 @@ import { ChevronDown } from "lucide-react"
 
 type Category = (typeof PRODUCT_CATEGORIES)[number]
 interface NavItemProps {
-  category: Category
-  handleOpen: () => void
+  category?: Category
+  handleOpen: (arg1: number, arg2: number | null) => void
   close: () => void
-  isOpen: boolean
   isAnyOpen: boolean
+  index: number
+  activeIndex: number | null
 }
-const NavItem = ({ category, handleOpen, close, isOpen, isAnyOpen }: NavItemProps) => {
+
+const NavItem = ({ category, handleOpen, close, isAnyOpen, activeIndex, index }: NavItemProps) => {
+  const isOpen = index === activeIndex
   return (
     <div className="flex">
       <div className="relative flex items-center">
-        <Button className="gap-1.5" onClick={handleOpen} variant={isOpen ? "secondary" : "ghost"}>
-          {category.label}
-          <ChevronDown
-            className={cn("h-4 w-4 transition-all text-muted-foreground", {
-              "-rotate-180": isOpen,
-            })}
-          />
+        <Button
+          className="gap-1.5"
+          onClick={() => handleOpen(index, activeIndex)}
+          variant={isOpen ? "secondary" : "ghost"}>
+          {category?.label}
+          {category?.featured && (
+            <ChevronDown
+              className={cn("h-4 w-4 transition-all text-muted-foreground", {
+                "-rotate-180": isOpen,
+              })}
+            />
+          )}
         </Button>
       </div>
-      {isOpen ? (
+      {isOpen && category?.featured ? (
         <div
           onClick={() => close()}
           className={cn("absolute inset-x-0 top-full text-sm text-muted-foreground", {
@@ -40,7 +48,7 @@ const NavItem = ({ category, handleOpen, close, isOpen, isAnyOpen }: NavItemProp
             <div className="mx-auto max-w-7xl px-8">
               <div className="grid grid-cols-4 gap-x-8 gap-y-10 py-16">
                 <div className="col-span-4 col-start-1 grid grid-cols-3 gap-x-8">
-                  {category.featured.map((item) => (
+                  {category?.featured.map((item) => (
                     <div onClick={() => close} key={item.name} className="group relative text-base sm:text-sm">
                       <Link href={item.href} className="contents">
                         <div className="relative aspect-video overflow-hidden rounded-lg bg-muted/30 group-hover:opacity-80 transition-opacity duration-100">

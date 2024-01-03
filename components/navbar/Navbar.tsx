@@ -1,14 +1,14 @@
 import Link from "next/link"
 import { cookies } from "next/headers"
 import Container from "@/components/Container"
-import Cart from "@/components/Cart"
-import NavItems from "@/components/NavItems"
+import Cart from "@/components/navbar/Cart"
+import NavItems from "@/components/navbar/NavItems"
 import ThemeButton from "@/components/ThemeButton"
 import { Separator } from "@/components/ui/separator"
 import { Icons } from "@/components/Icons"
 import { buttonVariants } from "@/components/ui/button"
-import NavUserDropdown from "@/components/NavUserDropdown"
-import MobileNav from "@/components/MobileNav"
+import NavUserDropdown from "@/components/navbar/NavUserDropdown"
+import MobileNav from "@/components/navbar/MobileNav"
 import { useGetUser } from "@/hooks/useGetUser"
 
 const Navbar = async () => {
@@ -27,7 +27,7 @@ const Navbar = async () => {
             <div className="flex justify-end w-full md:hidden">
               <MobileNav user={user} />
             </div>
-            <div className="z-50 hidden lg:ml-8 lg:block lg:self-stretch">
+            <div className="z-50 hidden ml-8 md:block self-stretch">
               <NavItems />
             </div>
             <div className="flex items-center ml-auto">

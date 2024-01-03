@@ -3,6 +3,7 @@ import Container from "@/components/Container"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { ArrowDownToLine, CheckCircle, Leaf } from "lucide-react"
 import ProductsCarousel from "@/components/ProductsCarousel"
+import CategorySection from "@/components/CategorySection"
 
 const perks = [
   {
@@ -42,7 +43,21 @@ const HomePage = () => {
             <Button variant="secondary">Our quality promise &rarr;</Button>
           </div>
         </div>
-        <ProductsCarousel title="Brand New" href="/products" query={{ sort: "desc", limit: 4 }} />
+        <ProductsCarousel
+          title="Latest Products"
+          subtitle="Shop newly launched products from MarketPlace"
+          href="/products"
+          query={{ sort: "-createdAt", limit: 4 }}
+        />
+      </Container>
+      <CategorySection />
+      <Container>
+        <ProductsCarousel
+          title="Trending Products"
+          subtitle="Shop trending products from MarketPlace"
+          href="/products"
+          query={{ sort: "-name", limit: 4 }}
+        />
       </Container>
       <section className="border-t border-muted-foreground/10 bg-muted/80">
         <Container className="py-20">

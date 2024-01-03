@@ -11,10 +11,10 @@ export async function middleware(req: NextRequest) {
         return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SERVER_URL}/${param}`)
       } else return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SERVER_URL}/`)
     }
-    return NextResponse.next()
   } else {
     if (nextUrl.pathname.startsWith("/wishlist") || nextUrl.pathname.startsWith("/orders")) {
       return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SERVER_URL}/sign-in?origin=${nextUrl.pathname.slice(1)}`)
     }
   }
+  return NextResponse.next()
 }

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import CartItem from "@/components/CartItem"
+import CartItem from "@/components/navbar/CartItem"
 import { Button } from "@/components/ui/button"
 import { trpc } from "@/server/trpc/client"
 import { useCart } from "@/hooks/useCart"

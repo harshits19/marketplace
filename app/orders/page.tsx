@@ -1,24 +1,16 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Container from "@/components/Container"
+import { OrderItems, OrderItemsShimmer } from "@/components/OrderItems"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { trpc } from "@/server/trpc/client"
 import { Order } from "@/server/payload-types"
-import { OrderItems, OrderItemsShimmer } from "@/components/OrderItems"
 
 const OrdersPage = () => {
   type SortType = "asc" | "-createdAt"
   const [sort, setSort] = useState<SortType>("-createdAt")
-  const [orders, setOrders] = useState<Order[]>([])
-  const { data, isLoading, fetchNextPage } = trpc.getOrders.fetchAllOrdersbyUser.useInfiniteQuery(
-    { limit: 10, sorted: sort },
-    {
-      getNextPageParam: (lastPage) => lastPage.nextPage,
-    }
-  )
-  useEffect(() => {
-    setOrders(data?.pages[0]?.orders as Order[])
-  }, [data])
+  const { data, isLoading } = trpc.getOrders.fetchAllOrdersbyUser.useQuery(sort, { retry: false })
+  const orders = data?.orders as Order[]
 
   return (
     <Container className="max-w-5xl my-8 sm:my-20">
@@ -45,7 +37,7 @@ const OrdersPage = () => {
             ))}
           </div>
         ) : (
-          <p className="p-8 my-16 text-xl font-semibold text-center">No orders yet!</p>
+          <p className="p-8 my-16 md:my-32 text-xl font-semibold text-center">No orders yet!</p>
         )}
       </section>
     </Container>

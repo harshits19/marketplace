@@ -3,7 +3,6 @@ import { getPayloadClient } from "../get-payload"
 import { privateProcedure, publicProcedure, router } from "./trpc"
 import { QueryValidator } from "../../lib/validators/query-validator"
 import { TRPCError } from "@trpc/server"
-import { revalidatePath } from "next/cache"
 
 export const productsRouter = router({
   carouselData: publicProcedure
@@ -48,7 +47,7 @@ export const productsRouter = router({
         nextPage: hasNextPage ? nextPage : null,
       }
     }),
-  modifyWishList: privateProcedure.input(z.object({ products: z.string()})).mutation(async ({ ctx, input }) => {
+  modifyWishList: privateProcedure.input(z.object({ products: z.string() })).mutation(async ({ ctx, input }) => {
     //get current user details
     const { user } = ctx
     const { products } = input
@@ -81,7 +80,7 @@ export const productsRouter = router({
       limit: 1,
       depth: 2,
     })
-    if (!wishlist?.docs?.length) throw new TRPCError({ code: "NOT_FOUND" })
+    if (!wishlist?.docs[0]?.products?.length) throw new TRPCError({ code: "NOT_FOUND" })
     return wishlist
   }),
 })
