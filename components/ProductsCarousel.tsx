@@ -55,6 +55,9 @@ const ProductsCarousel = ({ title, subtitle, href, query }: ProductsCarouselProp
             ))}
           </div>
         </div>
+        {products?.length === 0 && (
+          <p className="p-8 my-16 md:my-32 text-xl font-semibold text-center">No products available.</p>
+        )}
       </div>
     </section>
   )

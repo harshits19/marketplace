@@ -1,25 +1,23 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
+import { toast } from "sonner"
 import { trpc } from "@/server/trpc/client"
 import { cn } from "@/lib/utils"
 import { Product } from "@/server/payload-types"
 
 const WishlistButton = ({ product }: { product: Product }) => {
-  const router = useRouter()
-  const pathname = usePathname()
   const productId = product?.id
-  const { mutate: modifyWishList } = trpc.getInfiniteProducts.modifyWishList.useMutation({})
-  const { data } = trpc.getInfiniteProducts.getWishList.useQuery()
+  const { mutate: modifyWishList } = trpc.getInfiniteProducts.modifyWishList.useMutation()
+  const { data } = trpc.getInfiniteProducts.getWishList.useQuery(undefined, { retry: false })
   const wishlist = data?.docs[0]?.products?.map((prod) => prod) as Product[]
   const wishlistIds = wishlist?.flatMap((prod) => prod.id)
   const isWishlisted = wishlistIds?.some((id) => id === productId)
+  const [isClicked, setIsClicked] = useState(isWishlisted || false)
   useEffect(() => {
     setIsClicked(isWishlisted || false)
   }, [isWishlisted])
-  const [isClicked, setIsClicked] = useState(isWishlisted || false)
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation()
@@ -36,8 +34,8 @@ const WishlistButton = ({ product }: { product: Product }) => {
         modifyWishList({ products: productIds })
       }
     } catch (error) {
-      router.push(`/sign-in?origin=${pathname.slice(1)}`)
-      return
+      toast.error("Unable to wishlist item. Please try after some time.")
+      setIsClicked(false)
     }
   }
 

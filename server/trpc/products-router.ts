@@ -48,8 +48,8 @@ export const productsRouter = router({
       }
     }),
   modifyWishList: privateProcedure.input(z.object({ products: z.string() })).mutation(async ({ ctx, input }) => {
-    //get current user details
     const { user } = ctx
+    if (!user) throw new TRPCError({ code: "UNAUTHORIZED" })
     const { products } = input
     const productIds = JSON.parse(products) as string[]
     const payload = await getPayloadClient()
@@ -66,7 +66,6 @@ export const productsRouter = router({
     })
   }),
   getWishList: privateProcedure.query(async ({ ctx }) => {
-    //get current user details
     const { user } = ctx
     if (!user) throw new TRPCError({ code: "UNAUTHORIZED" })
     const payload = await getPayloadClient()
@@ -80,7 +79,6 @@ export const productsRouter = router({
       limit: 1,
       depth: 2,
     })
-    if (!wishlist?.docs[0]?.products?.length) throw new TRPCError({ code: "NOT_FOUND" })
     return wishlist
   }),
 })

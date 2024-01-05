@@ -1,6 +1,5 @@
 import express from "express"
 import path from "path"
-import { parse } from "url"
 import { IncomingMessage } from "http"
 import bodyParser from "body-parser"
 import nextBuild from "next/dist/build"
@@ -50,11 +49,48 @@ const start = async () => {
   cartRouter.get("/", (req, res) => {
     const request = req as PayloadRequest
     if (!request.user) return res.redirect("/sign-in?origin=cart")
-    const parsedUrl = parse(req.url, true)
-    const { query } = parsedUrl
-    return nextApp.render(req, res, "/cart", query)
+    return nextApp.render(req, res, "/cart")
   })
   app.use("/cart", cartRouter)
+
+  const signInRouter = express.Router()
+  signInRouter.use(payload.authenticate)
+  signInRouter.get("/", (req, res) => {
+    const request = req as PayloadRequest
+    //if user is logged in, then redirect him to homepage
+    const origin = req.query.origin || ""
+    if (request.user) return res.redirect(`/${origin}`)
+    //else redirect to sign-in
+    return nextApp.render(req, res, "/sign-in")
+  })
+  app.use("/sign-in", signInRouter)
+
+  const signUpRouter = express.Router()
+  signUpRouter.use(payload.authenticate)
+  signUpRouter.get("/", (req, res) => {
+    const request = req as PayloadRequest
+    if (request.user) return res.redirect("/")
+    return nextApp.render(req, res, "/sign-up")
+  })
+  app.use("/sign-up", signUpRouter)
+
+  const wishlistRouter = express.Router()
+  wishlistRouter.use(payload.authenticate)
+  wishlistRouter.get("/", (req, res) => {
+    const request = req as PayloadRequest
+    if (!request.user) return res.redirect("/sign-in?origin=wishlist")
+    return nextApp.render(req, res, "/wishlist")
+  })
+  app.use("/wishlist", wishlistRouter)
+
+  const ordersRouter = express.Router()
+  ordersRouter.use(payload.authenticate)
+  ordersRouter.get("/", (req, res) => {
+    const request = req as PayloadRequest
+    if (!request.user) return res.redirect("/sign-in?origin=orders")
+    return nextApp.render(req, res, "/orders")
+  })
+  app.use("/orders", ordersRouter)
 
   //trpc middleware
   app.use(

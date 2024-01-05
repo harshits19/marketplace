@@ -49,17 +49,17 @@ const SigninPage = () => {
     },
     onSuccess: () => {
       toast.success(`Signed in successfully`)
-      if (origin) {
-        router.push(`/${origin}`)
-        router.refresh()
-        return
-      }
       if (isSeller) {
         router.push("/sell")
         return
+      } else if (origin) {
+        router.push(`/${origin}`)
+        router.refresh()
+        return
+      } else {
+        router.push("/")
+        router.refresh()
       }
-      router.push("/")
-      router.refresh()
     },
   })
 
