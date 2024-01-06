@@ -1,7 +1,9 @@
 "use client"
 
+import Link from "next/link"
 import Container from "@/components/Container"
 import ProductItem, { ProductPlaceholder } from "@/components/ProductItem"
+import { buttonVariants } from "@/components/ui/button"
 import { Product } from "@/server/payload-types"
 import { trpc } from "@/server/trpc/client"
 
@@ -27,7 +29,13 @@ const WishlistPage = () => {
               ))}
             </div>
           ) : (
-            <p className="py-8 my-16 text-xl font-semibold">No items in wishlist!</p>
+            <div className="p-8 my-16 md:my-32 flex justify-center items-center text-sm">
+              Discover and wishlist new products{" "}
+              <Link href="/products" className={buttonVariants({ variant: "link", className: "pl-1 pr-0" })}>
+                click here
+              </Link>
+              .
+            </div>
           )}
         </div>
       </section>

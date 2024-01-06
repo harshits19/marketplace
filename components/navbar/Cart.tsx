@@ -48,15 +48,8 @@ const Cart = ({ variant }: { variant: "desktop" | "mobile" }) => {
         )}
       </SheetTrigger>
       <SheetContent className="flex flex-col w-full pr-0 sm:max-w-lg">
-        <SheetHeader className="flex flex-row items-center justify-between pr-8 mt-2">
+        <SheetHeader className="mt-2">
           <SheetTitle>Cart ({itemCount})</SheetTitle>
-          {items?.length > 0 && (
-            <button
-              className="px-3 py-1 text-sm transition-colors duration-100 rounded-md hover:bg-muted"
-              onClick={() => clearCart()}>
-              Clear
-            </button>
-          )}
         </SheetHeader>
         {itemCount > 0 ? (
           <>
@@ -66,6 +59,11 @@ const Cart = ({ variant }: { variant: "desktop" | "mobile" }) => {
                   <CartItem product={product} key={idx} variant="slide" />
                 ))}
               </ScrollArea>
+              <button
+                className="py-1.5 w-full text-sm transition-colors duration-100 rounded-md bg-muted hover:bg-muted/70 mt-4"
+                onClick={() => clearCart()}>
+                Clear cart
+              </button>
             </div>
             <div className="pr-6 space-y-4">
               <DropdownMenuSeparator />

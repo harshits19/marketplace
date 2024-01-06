@@ -4,6 +4,7 @@ import ProductItem from "@/components/ProductItem"
 import { Product } from "@/server/payload-types"
 import { trpc } from "@/server/trpc/client"
 import { TQueryValidator } from "@/lib/validators/query-validator"
+import { buttonVariants } from "./ui/button"
 
 interface ProductsCarouselProps {
   title: string
@@ -56,7 +57,12 @@ const ProductsCarousel = ({ title, subtitle, href, query }: ProductsCarouselProp
           </div>
         </div>
         {products?.length === 0 && (
-          <p className="p-8 my-16 md:my-32 text-xl font-semibold text-center">No products available.</p>
+          <div className="h-full p-8 my-16 text-sm flex items-center justify-center">
+            <span>Products unavailable.</span>
+            <Link href="/products" className={buttonVariants({ variant: "link", className: "pl-1" })}>
+              Browse trending &rarr;
+            </Link>
+          </div>
         )}
       </div>
     </section>

@@ -1,7 +1,9 @@
 "use client"
 import { useState } from "react"
+import Link from "next/link"
 import Container from "@/components/Container"
 import { OrderItems, OrderItemsShimmer } from "@/components/OrderItems"
+import { buttonVariants } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { trpc } from "@/server/trpc/client"
 import { Order } from "@/server/payload-types"
@@ -37,7 +39,13 @@ const OrdersPage = () => {
             ))}
           </div>
         ) : (
-          <p className="p-8 my-16 md:my-32 text-xl font-semibold text-center">No orders yet!</p>
+          <div className="p-8 my-16 md:my-32 flex justify-center items-center text-sm">
+            To order your first product{" "}
+            <Link href="/products" className={buttonVariants({ variant: "link", className: "pl-1 pr-0" })}>
+              click here
+            </Link>
+            .
+          </div>
         )}
       </section>
     </Container>
